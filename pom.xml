@@ -51,7 +51,7 @@
                             <executable>python</executable>
                             <workingDirectory>${basedir}/</workingDirectory>
                             <arguments>
-                                <argument>createArtifactProperties.py</argument>
+                                <argument>CreateArtifactProperties.py</argument>
                             </arguments>
                         </configuration>
                         <phase>compile</phase>

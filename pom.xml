@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ericsson.bss.rm.cpm.cdac</groupId>
+    <artifactId>common</artifactId>
+    <version>8.99.0-SNAPSHOT</version>
+    <name>${project.groupId}/${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <git.host>gerrit-epk.seli.gic.ericsson.se:29418</git.host>
+        <org.apache.maven.plugins.maven-deploy-plugin.version>2.7</org.apache.maven.plugins.maven-deploy-plugin.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:ssh://${git.host}/charging/com.ericsson.bss.rm.cpm.cdac.common</connection>
+        <url>scm:git:ssh://${git.host}/charging/com.ericsson.bss.rm.cpm.cdac.common</url>
+        <developerConnection>scm:git:ssh://${git.host}/charging/com.ericsson.bss.rm.cpm.cdac.common</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <url>https://eforge.ericsson.se/sf/projects/cpm</url>
+    <description>Description of cdac.common.</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                    <skipDeploy>false</skipDeploy>
+                    <generateReports>true</generateReports>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${org.apache.maven.plugins.maven-deploy-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <executions>
+                    <execution>
+                        <id>python_build</id>
+                        <configuration>
+                            <executable>python</executable>
+                            <workingDirectory>${basedir}/</workingDirectory>
+                            <arguments>
+                                <argument>createArtifactProperties.py</argument>
+                            </arguments>
+                        </configuration>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <site>
+            <id>bss.maven.site</id>
+            <url>file://${maven.site.basepath}${maven.site.versionpath}/latest/${project.groupId}.${project.artifactId}</url>
+        </site>
+    </distributionManagement>
+</project>

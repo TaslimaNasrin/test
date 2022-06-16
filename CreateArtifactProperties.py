@@ -14,6 +14,6 @@ rel_gid = root.find("./xmlns:groupId", namespaces=namespaces)
 rel_aid = root.find("./xmlns:artifactId", namespaces=namespaces)
 #print(rel_ver.text)
 #print(rel_gid.text)
-file = open("artifact.properties", "w")
+file = open("output/artifact.properties", "w")
 file.write("GAVC=" +rel_gid.text + ":" + rel_aid.text + ":" +rel_ver.text)
 file.close
